@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Jokes</title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Braah+One&family=Lugrasimo&family=Open+Sans:wght@700&family=Poppins:wght@400;900&family=Raleway:wght@400;700&family=Redressed&family=Roboto:wght@400;500&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Redressed', cursive;
+            background-color:#2980b9;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            background-color: white;
+            box-shadow: 0 10px 20px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+            padding: 50px 20px;
+            max-width: 100%;
+            width: 800px;
+        }
+        h3{
+            color: rgb(148,141,141);
+            letter-spacing: 1   px;
+            text-transform: capitalize;
+            font-family: 'Lugrasimo', cursive;
+        }
+        .joke{
+            font-size: 30px;
+            line-height: 40px;
+            max-width: 600px;
+            letter-spacing: 1px;
+            margin: 50px auto;
+        }
+        #jokeBtn{
+            background-color: gold;
+            font-size: 20px;
+            outline: none;
+            cursor: pointer;
+            padding: 12px 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            font-weight: bolder;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            border: 0;
+            color: white;
+        }
+        #jokeBtn:hover{
+            background-color: white;
+            color: gold;
+
+        }
+        @media screen and (max-width:881px) {
+            .container{
+            width: 600px;
+            }
+        }
+        @media screen and (max-width:720px) {
+            .container{
+            width: 500px;
+            }
+        }
+        @media screen and (max-width:550px) {
+            .container{
+            width: 350px;
+            }
+            .joke{
+            font-size: 24px;
+            line-height: 24px;
+            padding: 20px 10px;
+            max-width: 400px;
+            margin: 10px auto;
+            }
+            h3{
+            font-size: 14px;
+            }
+            #jokeBtn{
+            font-size: 15px;
+            padding: 12px 20px;
+        }
+        }
+        @media screen and (max-width:321px) {
+            .container{
+            width: 300px;
+            }
+            .joke{
+            font-size: 20px;
+            line-height: 24px;
+            padding: 20px 10px;
+            max-width: 400px;
+            margin: 10px auto;
+            }
+            h3{
+            font-size: 14px;
+            }
+            #jokeBtn{
+            font-size: 15px;
+            padding: 12px 20px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Best Jokes to make your day</h3>
+        <div class="joke" id="jokes">Awsome Jokes Loading...</div>
+        <button id="jokeBtn">Next JOKE</button>
+    </div>
+
+
+
+    <script>
+        let joke = document.querySelector('#jokes');
+        let btn = document.querySelector('#jokeBtn');
+
+
+        // GET https://icanhazdadjoke.com/
+
+        //Using Promises then then and catch method
+
+        // const loadJokes = ()=>{
+        //     // const setHeader = {
+        //     //     headers : {
+        //     //         Accept: 'application/json'
+        //     //     }
+        //     // }
+
+
+        //     // fetch('https://icanhazdadjoke.com',setHeader)
+        //     // .then((res)=>res.json())
+        //     // .then((data)=>{
+        //     //     joke.innerHTML = data.joke;
+        //     // }).catch((error)=>{
+        //     //     console.log(error);
+        //     // })
+            
+        // }
+
+
+        //Using asyn await
+
+        const loadJokes = async ()=>{
+
+            try{
+                const setHeader = {
+                    headers : {
+                        Accept: 'application/json'
+                    }
+                }
+                   
+                const res = await fetch('https://icanhazdadjoke.com',setHeader);
+                const data = await res.json();
+                joke.innerHTML = data.joke;
+            }catch(error)
+            {
+                console.log(`The error is ${error}`);
+            }
+ 
+
+
+            
+        }
+        
+        btn.addEventListener('click',loadJokes);
+        loadJokes();
+    </script>
+</body>
+</html>
